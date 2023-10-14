@@ -197,9 +197,53 @@ const stgArray = concatArray<string[]>(["Levy", "Rafael"], ["Silva", "Buarque"])
 console.log(numArray)
 console.log(stgArray)
 
-// ---------------]
-// --- 
-// ---------------]
-// 
+console.log("teste pós ts-node-dev server instalado")
 
-console.log("teste ts-node-dev")
+// ---------------]
+// --- decorators
+// ---------------]
+// um conjunto de definições que pode ser usado posteriormente
+function apiVersion(version: string) {
+  return (target: any) =>{
+    Object.assign(target.prototype, {__version: version})
+  }
+}
+// class decorators
+@apiVersion("1.10'")
+class Api {
+  name: string;
+  constructor(name:string){
+    this.name = name;
+  }
+}
+
+// attribute decorators
+function minLength(length: number) {
+  return (target: any, key: string) =>{
+    let _value = target[key];
+
+    const getter = () => _value;
+    const setter = (value: string) =>{
+      if (value.length < length) {
+        throw new Error(`Tamanho menor do que ${length}`)
+      } else {
+        _value = value
+      }
+    };
+
+    Object.defineProperty(target, key, {
+      get: getter,
+      set: setter,
+    });
+  }
+}
+class Apiv2 {
+  @minLength(3) //seta o tmanho minimo para o decorator
+  name: string;
+  constructor(name:string){
+    this.name = name;
+  }
+}
+
+const api = new Apiv2("produtos");
+console.log(api.name);

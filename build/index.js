@@ -1,4 +1,10 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -93,3 +99,62 @@ class Pessoa {
 }
 const p = new Pessoa(1, "gutsman");
 console.log(p.sayHello());
+// ---------------]
+// --- Classes
+// ---------------]
+/*
+  data modifiers
+  public -  onde todos tem acesso
+  private - onde somente a classe tem acesso
+  protected - onde a classe e subclasse consegue enxergar
+*/
+class Character {
+    constructor(name, streght, skill) {
+        this.name = name;
+        this.stregth = streght;
+        this.skill = skill;
+    }
+    attack() {
+        console.log(`Attack with ${this.stregth} point`);
+    }
+}
+// Character: superClass
+// Magician: subClass
+class Magician extends Character {
+    constructor(name, stregth, skill, magicPoints) {
+        super(name, stregth, skill);
+        this.magicPoints = magicPoints;
+    }
+}
+const p1 = new Character("ryu", 10, 98);
+const p2 = new Magician("Mago", 9, 30, 100);
+p1.attack();
+p2.attack();
+// ---------------]
+// --- Generics
+// ---------------]
+// serve pra deixar em aberto o tipo que será passado no parametro da função.
+function concatArray(...itens) {
+    return new Array().concat(...itens);
+}
+const numArray = concatArray([1, 5], [3]);
+const stgArray = concatArray(["Levy", "Rafael"], ["Silva", "Buarque"]);
+console.log(numArray);
+console.log(stgArray);
+console.log("teste pós ts-node-dev server instalado");
+// ---------------]
+// --- decorators
+// ---------------]
+// 
+function apiVersion(version) {
+    return (target) => {
+        Object.assign(target.prototype, { __version: version });
+    };
+}
+let Api = class Api {
+};
+Api = __decorate([
+    apiVersion("1.10'")
+], Api);
+const api = new Api();
+console.log(api.__version);
