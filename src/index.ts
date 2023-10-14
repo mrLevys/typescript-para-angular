@@ -182,5 +182,24 @@ p1.attack();
 p2.attack();
 
 
+// ---------------]
+// --- Generics
+// ---------------]
+// serve pra deixar em aberto o tipo que será passado no parametro da função.
 
+function concatArray<T>(...itens: T[]): T[]{
+  return new Array().concat(...itens);
+}
 
+const numArray = concatArray<number[]>([1, 5], [3]);
+const stgArray = concatArray<string[]>(["Levy", "Rafael"], ["Silva", "Buarque"]);
+
+console.log(numArray)
+console.log(stgArray)
+
+// ---------------]
+// --- 
+// ---------------]
+// 
+
+console.log("teste ts-node-dev")
