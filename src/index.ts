@@ -134,6 +134,36 @@ const p = new Pessoa (1, "gutsman");
 console.log(p.sayHello());
 
 
+// ---------------]
+// --- Classes
+// ---------------]
+
+/*
+  data modifiers
+  public -  onde todos tem acesso
+  private - onde somente a classe tem acesso
+  protected - onde a classe e subclasse consegue enxergar
+*/
+
+class Character {
+  public name?: string; // opcional
+  stregth: number;
+  skill: number;
+
+  constructor( name:string, streght: number, skill: number){
+    this.name = name;
+    this.stregth = streght;
+    this.skill = skill
+  }
+
+  attack():void {
+    console.log(`Attack with ${this.stregth} point`)
+  }
+}
+
+const p1 = new Character ("ryu",10,98);
+p1.attack();
+
 
 
 
